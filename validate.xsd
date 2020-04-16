@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="departments">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" name="university">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="item">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="name">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute name="lang" type="language_type" use="required" />
+                            <xs:attribute name="second" type="second_type" use="required" />
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="period" type="xs:integer" />
+                    <xs:element name="quota">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:integer">
+                            <xs:attribute name="spec" type="spec_type" use="required" />
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="field" type="field_type" />
+                    <xs:element name="last_min_score">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="score_type">
+                            <xs:attribute name="order" type="order_type" use="required" />
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="grant" type="grant_type" />
+                  </xs:sequence>
+                  <xs:attribute name="faculty" type="xs:string" use="required" />
+                  <xs:attribute name="id" type="ID_type" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="name" type="xs:string" use="required" />
+            <xs:attribute name="uType" type="uType_type" use="required" />
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:simpleType name="language_type">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="tr"/>
+      <xs:enumeration value="en"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="second_type">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="no"/>
+      <xs:enumeration value="yes"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="field_type">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SAY"/>
+      <xs:enumeration value="SÖZ"/>
+      <xs:enumeration value="EA"/>
+      <xs:enumeration value="DİL"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="order_type">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="\d*|\s{0}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="grant_type">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="\d*|\s{0}"/>
+      <xs:pattern value="25|50|100"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="spec_type">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="\d*|\s{0}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="score_type">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="\d*|\s{0}"/>
+      <xs:pattern value="[1-9][0-9][0-9],[0-9]*"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ID_type">
+    <xs:restriction base="xs:integer">
+      <xs:pattern value="[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="uType_type">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Devlet"/>
+      <xs:enumeration value="Vakıf"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
